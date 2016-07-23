@@ -4,6 +4,7 @@
         <file>MainMenu.qml</file>
         <file>SettingsTab.qml</file>
         <file>StatisticsTab.qml</file>
+        <file>texts.tst</file>
     </qresource>
     <qresource prefix="/CustomElements">
         <file>BottomNavBar.qml</file>

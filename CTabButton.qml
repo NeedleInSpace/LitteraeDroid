@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.0
 
 TabButton {
@@ -27,15 +28,17 @@ TabButton {
             bottomPadding: 6
 
         }
-        Rectangle {
-            height: 24
-            width: 24
+        // Random icon for a concept view
+        Image {
+
+            source: "qrc:/icons/ic_add_alert_24px.svg"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: t.top
-            radius: 12
-            color: control.checked ? control.Material.primaryColor
-                                   : control.Material.hintTextColor
+            opacity: control.checked ? 1 : 0.38
+            layer.enabled: true
+            layer.effect: ColorOverlay { color: Material.primaryColor}
         }
+
     }
 
 

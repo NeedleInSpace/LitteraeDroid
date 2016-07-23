@@ -11,9 +11,17 @@ ApplicationWindow {
 
     id: mW
     visible: true
+
+    height: 800
+    width: 480
+
+    Material.primary: Material.Teal
+
+
+    /* Commented for debug
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
-
+    */
     StackLayout {
 
         anchors.fill: parent
@@ -40,5 +48,7 @@ ApplicationWindow {
         id: appBar
         title: navBar.currBar
     }
+
+
 
 }
