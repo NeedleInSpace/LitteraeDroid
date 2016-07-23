@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainMenu.qml</file>
+        <file>SettingsTab.qml</file>
+        <file>StatisticsTab.qml</file>
+    </qresource>
+    <qresource prefix="/CustomElements">
+        <file>BottomNavBar.qml</file>
+        <file>ElevationEffect.qml</file>
+        <file>AppBar.qml</file>
+        <file>CTabButton.qml</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>ic_text_fields_48px.svg</file>
+        <file>ic_add_alert_24px.svg</file>
+    </qresource>
+</RCC>
