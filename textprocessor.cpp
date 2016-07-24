@@ -2,6 +2,8 @@
 
 TextProcessor::TextProcessor(QObject *parent) : QObject(parent)
 {
+    file.setFileName(":/texts.tst");
+    readFile();
     clock = new QTimer;
     connect(clock, SIGNAL(timeout()),this,SLOT(updateTimer()));
     m_timer = 0;
@@ -14,7 +16,7 @@ QString TextProcessor::text() const {
     return m_text;
 }
 
-void TextProcessor::setText(QString s) {
+void TextProcessor::setText(const QString &s) {
 
     if(m_text == s) {
         return;
@@ -29,7 +31,7 @@ qreal TextProcessor::timer() const {
     return m_timer;
 }
 
-void TextProcessor::setTimer(qreal t) {
+void TextProcessor::setTimer(const qreal &t) {
 
     if(m_timer == t) {
         return;
@@ -77,4 +79,22 @@ void TextProcessor::updateTimer() {
 
     emit timerChanged();
 }
+
+void TextProcessor::readFile()
+{
+
+    if(!file.open(QFile::ReadOnly | QFile::Text)) {
+
+        return;
+    }
+    QTextStream stream(&file);
+    while (!stream.atEnd()) {
+        textList.push_back(stream.readLine());
+    }
+    file.close();
+
+}
+
+
+
 

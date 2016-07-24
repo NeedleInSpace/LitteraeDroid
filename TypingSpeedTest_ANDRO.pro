@@ -16,6 +16,7 @@ include(deployment.pri)
 
 HEADERS += \
     textprocessor.h \
-    statisticsmodel.h
+    statisticsmodel.h \
+    settingswrapper.h
 
 DISTFILES +=

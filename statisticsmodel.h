@@ -1,70 +1,80 @@
 #ifndef STATISTICSMODEL_H
 #define STATISTICSMODEL_H
-
-#include <QAbstractListModel>
+//Altered copy from previous project
+#include <QQmlListProperty>
 #include <QList>
+#include <QFile>
+#include <QDataStream>
 
 class StatisticsElement : public QObject
 {
     Q_OBJECT
-
-public:
-
-    StatisticsElement(const qreal& spd, const QString& dt, const int& t):
-        m_speed(spd), m_date(dt), m_typo(t) {}
-
-    qreal speed() const { return m_speed; }
-    QString date() const { return m_date; }
-    int typo() const { return m_typo; }
-
-    void speedSet(const qreal& s) { m_speed = s; }
-    void dateSet(const QString& str) { m_date = str; }
-    void typoSet(const int& i) { m_typo = i; }
+    Q_PROPERTY(qreal speed READ speed WRITE setSpeed NOTIFY speedChanged)
+    Q_PROPERTY(QString date READ date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(int typos READ typos WRITE setTypos NOTIFY typosChanged)
+    Q_PROPERTY(qreal points READ points WRITE setPoints NOTIFY pointsChanged)
 
 private:
-
     qreal m_speed;
     QString m_date;
-    int m_typo;
-};
-
-
-
-class StatisticsModel : public QAbstractListModel
-{
-    Q_OBJECT
+    int m_typos;
+    qreal m_points;
 
 public:
+    explicit StatisticsElement(QObject *parent = 0);
 
-    enum Roles {
+    qreal speed() const;
+    void setSpeed(const qreal& s);
+    QString date() const;
+    void setDate(const QString& d);
+    int typos() const;
+    void setTypos(const int& t);
+    qreal points() const;
+    void setPoints(const qreal& p);
 
-        SpeedRole = Qt::UserRole + 1,
-        DateRole,
-        TyposRole
-    };
+signals:
+    void speedChanged();
+    void dateChanged();
+    void typosChanged();
+    void pointsChanged();
+};
 
-    explicit StatisticsModel(QObject *parent = 0);
+class StatisticsModel : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QQmlListProperty<StatisticsElement> data READ data NOTIFY dataChanged)
+    Q_PROPERTY(qreal average READ average NOTIFY averageChanged)
+    Q_CLASSINFO("DefaultProperty", "data")
 
-    // Basic functionality:
-    QHash<int, QByteArray> StatisticsModel::roleNames() const;
+public:
+    StatisticsModel(QObject *parent = 0);
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QQmlListProperty<StatisticsElement> data();
+    Q_INVOKABLE void add(const qreal& s, const QString& d, const int& t, const qreal& p, bool flag);
+    Q_INVOKABLE void flush_stats();
+    Q_INVOKABLE int count();
 
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    qreal average() const;
+    void recalc_average();
+    void read_stats();
+    void append_stat_file(const qreal& s, const QString& d, const int& t, const qreal& p);
 
-    // Editable:
-    bool setData(const QModelIndex &index, const QVariant &value,
-                 int role = Qt::EditRole) override;
-
-    Qt::ItemFlags flags(const QModelIndex& index) const override;
-
-    Q_INVOKABLE void insertRow(const qreal &spd = 0,
-                   const QString &date = "",
-                   const int &t = 0);
+signals:
+    void dataChanged();
+    void averageChanged();
 
 private:
+    static void appendData(QQmlListProperty<StatisticsElement> *list, StatisticsElement *value);
+    static int countData(QQmlListProperty<StatisticsElement> *list);
+    static StatisticsElement* atData(QQmlListProperty<StatisticsElement> *list, int i);
+    static void clearData(QQmlListProperty<StatisticsElement> *list);
 
-    QList<StatisticsElement *> m_data;
+    QList<StatisticsElement* > m_data;
+    qreal m_average;
+    QFile statistics;
 };
+
+//Helper function for file access
+
 
 #endif // STATISTICSMODEL_H
