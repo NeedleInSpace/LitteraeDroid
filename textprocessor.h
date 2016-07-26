@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE void randomiseText(const bool &);
     Q_INVOKABLE int checkState(const QString &);
     Q_INVOKABLE void startClock() { clock->start(); }
+    Q_INVOKABLE void clockReset();
 
 
 signals:

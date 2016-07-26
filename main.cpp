@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<TextProcessor>("AppLogic",1,0,"TextProcessor");
     qmlRegisterType<StatisticsModel>("StatisticsModule",1,0,"StatisticsModel");
     qmlRegisterType<StatisticsElement>("StatisticsModule",1,0,"StatisticsElement");
-    qmlRegisterType<SettingsWrapper>("Settings",1,0,"Settings");
+    qmlRegisterType<SettingsWrapper>("AppLogic",1,0,"Settings");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));

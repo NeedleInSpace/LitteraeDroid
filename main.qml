@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
 import QtQuick.Window 2.2
 import StatisticsModule 1.0
+import AppLogic 1.0
 import "./CustomElements"
 
 
@@ -23,8 +24,15 @@ ApplicationWindow {
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     */
+
+    TextProcessor {
+
+        id: processor
+    }
+
     StackLayout {
 
+        id: layout
         anchors.fill: parent
         currentIndex: navBar.currentIndex
 
@@ -48,8 +56,8 @@ ApplicationWindow {
 
         id: appBar
         title: navBar.currBar
-    }
 
+    }
 
 
 }

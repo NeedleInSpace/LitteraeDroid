@@ -9,6 +9,7 @@ TextProcessor::TextProcessor(QObject *parent) : QObject(parent)
     m_timer = 0;
     clock->setSingleShot(false);
     clock->setInterval(50);
+    m_text = "The quick brown fox jumps over the lazy dog";
 }
 
 QString TextProcessor::text() const {
@@ -38,6 +39,12 @@ void TextProcessor::setTimer(const qreal &t) {
     }
     m_timer = t;
 
+    emit timerChanged();
+}
+
+void TextProcessor::clockReset() {
+    clock->stop();
+    m_timer = 0;
     emit timerChanged();
 }
 
@@ -75,8 +82,7 @@ int TextProcessor::checkState(const QString& input) {
 
 void TextProcessor::updateTimer() {
 
-    m_timer += clock->interval();
-
+    m_timer += (double)clock->interval()/1000;
     emit timerChanged();
 }
 

@@ -31,12 +31,14 @@ TabButton {
         // Random icon for a concept view
         Image {
 
-            source: "qrc:/icons/ic_add_alert_24px.svg"
+            source: "qrc:/icons/ic_text_format_black_24dp.png"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: t.top
             opacity: control.checked ? 1 : 0.38
             layer.enabled: true
-            layer.effect: ColorOverlay { color: Material.primaryColor}
+            layer.effect: ColorOverlay {
+                color: control.checked ? Material.primaryColor : Material.hintTextColor
+            }
         }
 
     }
