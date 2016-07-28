@@ -121,6 +121,7 @@ void StatisticsModel::add(const qreal& s, const QString& d, const int& t, const 
     st->setProperty("speed", s);
     st->setProperty("date", d);
     st->setProperty("typos", t);
+    st->setProperty("points", p);
     m_data.append(st);
     recalc_average();
     if (flag)

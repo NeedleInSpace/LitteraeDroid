@@ -12,8 +12,6 @@ ToolBar {
     RowLayout {
 
         anchors.fill: parent
-        anchors.leftMargin: 72
-        anchors.rightMargin: 16
 
         Text {
 
@@ -21,13 +19,9 @@ ToolBar {
             color: Material.primaryTextColor
             font.family: "Roboto"
             font.pixelSize: 20
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 16
+            anchors.left: parent.left
+            anchors.leftMargin: 72 / dp
+            verticalAlignment: Text.AlignVCenter
         }
-
-
-
     }
-
-
 }

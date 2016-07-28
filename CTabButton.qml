@@ -13,7 +13,7 @@ TabButton {
     contentItem: Item {
         anchors.bottom: parent.bottom
         anchors.top: parent.top
-        anchors.topMargin: 8
+        anchors.topMargin: 8 / dp
 
         Text {
             id: t
@@ -25,13 +25,15 @@ TabButton {
                                       : control.Material.hintTextColor
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            bottomPadding: 6
+            anchors.bottomMargin: 10 / dp
 
         }
         // Random icon for a concept view
         Image {
 
             source: "qrc:/icons/ic_text_format_black_24dp.png"
+            width: 24
+            height: 24
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: t.top
             opacity: control.checked ? 1 : 0.38

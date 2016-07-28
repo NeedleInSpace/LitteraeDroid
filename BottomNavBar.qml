@@ -16,7 +16,7 @@ TabBar {
 
     contentItem: ListView {
         implicitWidth: contentWidth
-        implicitHeight: 48
+        implicitHeight: 56
 
         model: navBar.contentModel
         currentIndex: navBar.currentIndex

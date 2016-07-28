@@ -14,20 +14,19 @@ ApplicationWindow {
     id: mW
     visible: true
 
-    height: 800
-    width: 480
-
+    height: Qt.platform.os === "windows" ? 800 : Screen.desktopAvailableHeight
+    width: Qt.platform.os === "windows" ? 480 : Screen.desktopAvailableWidth
+    property double dp: Screen.devicePixelRatio
     Material.primary: Material.Teal
-
-
-    /* Commented for debug
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
-    */
 
     TextProcessor {
 
         id: processor
+    }
+
+    StatisticsModel {
+
+        id: statistics
     }
 
     StackLayout {

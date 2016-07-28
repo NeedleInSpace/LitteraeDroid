@@ -8,7 +8,7 @@ TextProcessor::TextProcessor(QObject *parent) : QObject(parent)
     connect(clock, SIGNAL(timeout()),this,SLOT(updateTimer()));
     m_timer = 0;
     clock->setSingleShot(false);
-    clock->setInterval(50);
+    clock->setInterval(1000);
     m_text = "The quick brown fox jumps over the lazy dog";
 }
 
@@ -27,12 +27,12 @@ void TextProcessor::setText(const QString &s) {
     emit textChanged();
 }
 
-qreal TextProcessor::timer() const {
+int TextProcessor::timer() const {
 
     return m_timer;
 }
 
-void TextProcessor::setTimer(const qreal &t) {
+void TextProcessor::setTimer(const int &t) {
 
     if(m_timer == t) {
         return;
@@ -67,22 +67,29 @@ int TextProcessor::checkState(const QString& input) {
 
     if (m_text.contains(input)) {
         if (m_text.length() == input.length()){
-            //Stop and reset timer, return code 0  - complete
+            //Stop timer, return code 0  - complete
+            typoFlag = false;
             clock->stop();
-            m_timer = 0;
-            emit timerChanged();
             return 0;
         }
-        else
-            return 1; // code 1 - text OK, not complete
+        else {
+            typoFlag = false;
+            return 1;
+        } // code 1 - text OK, not complete
     }
-    else
-        return 2; // code 2 - text TYPO, not complete
+    else if (!typoFlag) {
+        typoFlag = true;
+        return 2;
+    } // code 2 - text ADDTYPO, not complete
+    else {
+        return 3;
+    } // code 3 - text ERR, not complete
+
 }
 
 void TextProcessor::updateTimer() {
 
-    m_timer += (double)clock->interval()/1000;
+    m_timer += 1;
     emit timerChanged();
 }
 

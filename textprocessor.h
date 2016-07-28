@@ -13,15 +13,15 @@ class TextProcessor : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-    Q_PROPERTY(qreal timer READ timer WRITE setTimer NOTIFY timerChanged)
+    Q_PROPERTY(int timer READ timer WRITE setTimer NOTIFY timerChanged)
 
 public:
     explicit TextProcessor(QObject *parent = 0);
 
     QString text() const;
     void setText(const QString& s);
-    qreal timer() const;
-    void setTimer(const qreal& t);
+    int timer() const;
+    void setTimer(const int &t);
 
     Q_INVOKABLE void randomiseText(const bool &);
     Q_INVOKABLE int checkState(const QString &);
@@ -40,9 +40,10 @@ private:
 
     QString m_text;
     QStringList textList;
-    qreal m_timer;
+    int m_timer;
     QTimer* clock;
     QFile file;
+    bool typoFlag;
 
 private slots:
 

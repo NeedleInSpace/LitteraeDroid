@@ -9,7 +9,7 @@ Item {
     height: 56
     width: 56
 
-    property var innerrect: innerR
+    property alias innerrect: innerR
 
     Button {
 
@@ -19,7 +19,7 @@ Item {
         anchors.fill: parent
         background: Rectangle {
 
-            radius: 28
+            radius: 29
             color: Material.accent
             layer.enabled: true
             layer.effect: DropShadow {
@@ -37,7 +37,7 @@ Item {
                 color: "white"
                 height: 20
                 width: 20
-                radius: 10
+                radius: 11
                 anchors.centerIn: parent
 
                 Behavior on radius {
@@ -47,16 +47,23 @@ Item {
         }
 
         onPressed: {
-
+            // TODO: pass property changes to states
             mainMenuRoot.state = mainMenuRoot.state === "" ? "LAUNCHED" : "";
             if (mainMenuRoot.state === "LAUNCHED") {
                 processor.randomiseText(true);
                 field.clear();
                 field.focus = true;
+                field.forceActiveFocus();
+                Qt.inputMethod.show();
                 processor.startClock();
             }
-            else
+            else {
                 processor.clockReset();
+                field.typos = 0;
+                field.clear();
+                field.focus = false;
+                textbgcolor = "white";
+            }
         }
 
 

@@ -28,9 +28,9 @@ Item {
             id: mainText
             text: gentxt
             anchors.fill: parent
-            anchors.leftMargin: 16
-            anchors.rightMargin: 16
-            topPadding: 8
+            anchors.leftMargin: 16 / dp
+            anchors.rightMargin: 16 / dp
+            topPadding: 8 / dp
             font.pixelSize: 16
             verticalAlignment: Text.AlignJustify
             wrapMode: Text.Wrap
@@ -40,7 +40,7 @@ Item {
     Behavior on height {
         NumberAnimation {
             duration: 150
-            easing: Easing.OutBounce
+            easing.type: Easing.OutBounce
         }
     }
 }
