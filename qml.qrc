@@ -8,7 +8,6 @@
     </qresource>
     <qresource prefix="/CustomElements">
         <file>BottomNavBar.qml</file>
-        <file>ElevationEffect.qml</file>
         <file>AppBar.qml</file>
         <file>CTabButton.qml</file>
         <file>FloatingActionButton.qml</file>

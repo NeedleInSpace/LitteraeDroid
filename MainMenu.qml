@@ -21,6 +21,10 @@ Item {
                 target: floatButt.innerrect
                 radius: 0
             }
+            PropertyChanges {
+                target: field
+                focus: true
+            }
         }
     ]
     //********************************************HEADERWITHTIMER
@@ -42,10 +46,9 @@ Item {
 
             id: lbl
             anchors.fill: parent
-            anchors.leftMargin: 72
-            anchors.rightMargin: 16 / dp
-            text: mainMenuRoot.state === "LAUNCHED" ? processor.timer + " sec | " + field.typos : "Timer hasn't started" // TODO: working timer
-            anchors.topMargin : 12 / dp
+            anchors.leftMargin: util.dp(72)
+            text: mainMenuRoot.state === "LAUNCHED" ? processor.timer + " sec : " + field.typos : "Timer hasn't started" // TODO: working timer
+            anchors.topMargin : util.dp(12)
             font.pixelSize: 24
             elide: Text.ElideLeft
         }
@@ -53,10 +56,9 @@ Item {
 
             id: subHead
             anchors.fill: parent
-            anchors.leftMargin: 72 / dp
-            anchors.rightMargin: 16 / dp
-            text: "Time elapsed" // TODO: working timer
-            anchors.bottomMargin: 20 / dp
+            anchors.leftMargin: util.dp(72)
+            text: "Time elapsed and total misprints"
+            anchors.bottomMargin: util.dp(20)
             color: Material.hintTextColor
             font.pixelSize: 14
             verticalAlignment: Text.AlignBottom
@@ -74,7 +76,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: text.top
-        anchors.bottomMargin: 16 / dp
+        anchors.bottomMargin: util.dp(16)
         contentHeight: card.height
         flickableDirection: Flickable.AutoFlickIfNeeded
 
@@ -84,9 +86,9 @@ Item {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: 16 / dp
-            anchors.rightMargin: 16 / dp
-            anchors.topMargin: 8 / dp
+            anchors.leftMargin: util.dp(16)
+            anchors.rightMargin: util.dp(16)
+            anchors.topMargin: util.dp(16)
 
         }
 
@@ -101,9 +103,6 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-
-
-
         z: 4
 
         TextField {
@@ -111,8 +110,8 @@ Item {
             id: field
             property int typos: 0
             anchors.fill: parent
-            anchors.leftMargin: 16 / dp
-            anchors.rightMargin: 16 / dp
+            anchors.leftMargin: util.dp(16)
+            anchors.rightMargin: util.dp(16)
             font.pixelSize: 16
             focus: false
             activeFocusOnPress: false
@@ -137,7 +136,6 @@ Item {
                                        spd * 1000 - typos * processor.text.length / 100, // TODO: correct points formula
                                        true);
                         typos = 0;
-                        focus = false;
                         clear();
                         text.color = "white";
                         text.Material.accent = mW.Material.accent
@@ -151,23 +149,16 @@ Item {
                         text.Material.accent = "#D50000"
                         text.color = "#FF8A80";
                         typos++;
-                        break;// TODO: update code reaction
+                        break;
                     case 3:
                         break;
                     default: break;
                     }
                 }
-                // TODO: pass property changes to states
 
-            }
-
-            background: Rectangle {
-                y: field.height - height - field.bottomPadding / 2
-                implicitWidth: 120
-                height: field.activeFocus ? 2 : 1
-                color: field.activeFocus ? field.Material.accentColor : Material.hintTextColor
             }
         }
+
         layer.enabled: true
         layer.effect: DropShadow {
             color: Material.dropShadowColor
@@ -176,14 +167,14 @@ Item {
         }
         Behavior on color {
             ColorAnimation {
-                duration: 75
+                duration: 90
             }
         }
     }
     //********************************************FINISHPOPUP
     FinishPopup {
 
-        id: pop
+        id: pop // TODO: last try statistics
     }
 
     //********************************************FAB
@@ -192,8 +183,8 @@ Item {
         id: floatButt
         anchors.right: parent.right
         anchors.bottom: text.top
-        anchors.rightMargin: 16 / dp
-        anchors.bottomMargin: 16 / dp
+        anchors.rightMargin: util.dp(16)
+        anchors.bottomMargin: util.dp(16)
         z: 4
     }
 

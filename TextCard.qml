@@ -19,8 +19,9 @@ Item {
         layer.enabled: true
         layer.effect: DropShadow {
             color: Material.dropShadowColor
-            samples: 10
-            spread: 0.5
+            samples: 12
+            spread: 0.2
+            verticalOffset: 2
         }
 
         Label {

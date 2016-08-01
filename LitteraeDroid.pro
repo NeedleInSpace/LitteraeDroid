@@ -1,10 +1,11 @@
-QT += qml quick quickcontrols2
+QT += qml quick quickcontrols2 charts
 
 CONFIG += c++11
 
 SOURCES += main.cpp \
     textprocessor.cpp \
-    statisticsmodel.cpp
+    statisticsmodel.cpp \
+    utility.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,7 +18,8 @@ include(deployment.pri)
 HEADERS += \
     textprocessor.h \
     statisticsmodel.h \
-    settingswrapper.h
+    settingswrapper.h \
+    utility.h
 
 DISTFILES += \
     android/AndroidManifest.xml \

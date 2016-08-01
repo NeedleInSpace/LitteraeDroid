@@ -7,7 +7,7 @@ ToolBar {
 
     id: appBar
     height: 56
-    property string title: "Typing speed test"
+    property string title: "Litterae Droid"
 
     RowLayout {
 
@@ -18,9 +18,10 @@ ToolBar {
             text: appBar.title
             color: Material.primaryTextColor
             font.family: "Roboto"
+            font.weight: Font.Medium
             font.pixelSize: 20
             anchors.left: parent.left
-            anchors.leftMargin: 72 / dp
+            anchors.leftMargin: util.dp(72)
             verticalAlignment: Text.AlignVCenter
         }
     }

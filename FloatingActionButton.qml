@@ -52,7 +52,6 @@ Item {
             if (mainMenuRoot.state === "LAUNCHED") {
                 processor.randomiseText(true);
                 field.clear();
-                field.focus = true;
                 field.forceActiveFocus();
                 Qt.inputMethod.show();
                 processor.startClock();
@@ -61,7 +60,6 @@ Item {
                 processor.clockReset();
                 field.typos = 0;
                 field.clear();
-                field.focus = false;
                 textbgcolor = "white";
             }
         }

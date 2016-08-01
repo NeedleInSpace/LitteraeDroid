@@ -1,13 +1,18 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
+import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.0
 
 TabBar {
 
     id: navBar
     layer.enabled: true
-    layer.effect: ElevationEffect { elevation: 8 }
+    layer.effect: DropShadow {
+        color: Material.dropShadowColor
+        samples: 12
+        spread: 0.2
+    }
     height: 56
     property var currBar: currentIndex == 0 ? "Typing Speed Test"
                                             : currentIndex == 1

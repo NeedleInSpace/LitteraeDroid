@@ -16,13 +16,23 @@ ApplicationWindow {
 
     height: Qt.platform.os === "windows" ? 800 : Screen.desktopAvailableHeight
     width: Qt.platform.os === "windows" ? 480 : Screen.desktopAvailableWidth
-    property double dp: Screen.devicePixelRatio
+    property double dp: 1
     Material.primary: Material.Teal
 
     TextProcessor {
 
         id: processor
     }
+
+    WSettings {
+
+        id: settings
+    }
+
+    Utilities {
+
+        id: util
+    }   
 
     StatisticsModel {
 

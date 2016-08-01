@@ -1,7 +1,8 @@
 #ifndef STATISTICSMODEL_H
 #define STATISTICSMODEL_H
 //Altered copy from previous project
-#include <QQmlListProperty>
+#include <QAbstractListModel>
+#include <QAbstractTableModel>
 #include <QList>
 #include <QFile>
 #include <QDataStream>
@@ -39,20 +40,31 @@ signals:
     void pointsChanged();
 };
 
-class StatisticsModel : public QObject
+class StatisticsModel : public QAbstractTableModel
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlListProperty<StatisticsElement> data READ data NOTIFY dataChanged)
-    Q_PROPERTY(qreal average READ average NOTIFY averageChanged)
-    Q_CLASSINFO("DefaultProperty", "data")
 
 public:
+
+    enum Roles {
+        SpeedRole = Qt::UserRole + 1,
+        DateRole,
+        TyposRole,
+        PointsRole,
+    };
+
     StatisticsModel(QObject *parent = 0);
 
-    QQmlListProperty<StatisticsElement> data();
-    Q_INVOKABLE void add(const qreal& s, const QString& d, const int& t, const qreal& p, bool flag);
+    QHash<int, QByteArray> roleNames() const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+
+    Q_INVOKABLE void add(const qreal& s, const QString& d, const int& t, const qreal& p, bool);
     Q_INVOKABLE void flush_stats();
-    Q_INVOKABLE int count();
 
     qreal average() const;
     void recalc_average();
@@ -60,21 +72,13 @@ public:
     void append_stat_file(const qreal& s, const QString& d, const int& t, const qreal& p);
 
 signals:
-    void dataChanged();
     void averageChanged();
 
 private:
-    static void appendData(QQmlListProperty<StatisticsElement> *list, StatisticsElement *value);
-    static int countData(QQmlListProperty<StatisticsElement> *list);
-    static StatisticsElement* atData(QQmlListProperty<StatisticsElement> *list, int i);
-    static void clearData(QQmlListProperty<StatisticsElement> *list);
 
     QList<StatisticsElement* > m_data;
     qreal m_average;
     QFile statistics;
 };
-
-//Helper function for file access
-
 
 #endif // STATISTICSMODEL_H
