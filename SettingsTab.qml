@@ -8,7 +8,7 @@ Item {
     id: settingsRoot
     anchors.fill: parent
     anchors.rightMargin: util.dp(16)
-    anchors.leftMargin: util.dp(16)
+    anchors.leftMargin: util.dp(28)
 
     ColumnLayout {
 
@@ -23,16 +23,41 @@ Item {
 
             Label {
 
-                anchors.fill: parent
-                text: "Track statistics"
+                anchors.left: parent.left
+                anchors.top: parent.top
+                text: "Statistics"
                 font.pixelSize: 16
-                verticalAlignment: Text.AlignVCenter
+                anchors.topMargin: util.dp(20)
+            }
+
+            Label {
+
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                text: "Track statistics"
+                font.pixelSize: 14
+                color: Material.hintTextColor
+                anchors.bottomMargin: util.dp(20)
             }
 
             Switch {
 
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
+                checked: settings.value("TrackStats", "true")
+                onClicked: {
+                    checked ? settings.setValue("TrackStats", "true") : settings.setValue("TrackStats", "false");
+                }
+            }
+
+            Rectangle {
+
+                height: 1
+                width: parent.width
+                anchors.bottom: parent.bottom
+                color: "black"
+                opacity: 0.1
+
             }
         }
 

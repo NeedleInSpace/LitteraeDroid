@@ -40,9 +40,11 @@ signals:
     void pointsChanged();
 };
 
+//Data can be accessed by index or by role name in qml
 class StatisticsModel : public QAbstractTableModel
 {
     Q_OBJECT
+    Q_PROPERTY(qreal average READ average NOTIFY averageChanged)
 
 public:
 

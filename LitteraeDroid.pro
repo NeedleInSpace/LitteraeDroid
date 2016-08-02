@@ -1,4 +1,4 @@
-QT += qml quick quickcontrols2 charts
+QT += qml quick quickcontrols2
 
 CONFIG += c++11
 
@@ -31,3 +31,4 @@ DISTFILES += \
     android/gradlew.bat
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+

@@ -1,4 +1,4 @@
-#include <QApplication>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQmlContext>
@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     QQuickStyle::setStyle("Material");
     qmlRegisterType<TextProcessor>("AppLogic",1,0,"TextProcessor");
     qmlRegisterType<StatisticsModel>("StatisticsModule",1,0,"StatisticsModel");
