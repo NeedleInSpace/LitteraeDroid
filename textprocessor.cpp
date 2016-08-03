@@ -5,10 +5,11 @@ TextProcessor::TextProcessor(QObject *parent) : QObject(parent)
     file.setFileName(":/texts.tst");
     readFile();
     clock = new QTimer;
+    clock->setTimerType(Qt::PreciseTimer);
     connect(clock, SIGNAL(timeout()),this,SLOT(updateTimer()));
     m_timer = 0;
     clock->setSingleShot(false);
-    clock->setInterval(1000);
+    clock->setInterval(20);
     m_text = "The quick brown fox jumps over the lazy dog";
 }
 
@@ -27,12 +28,12 @@ void TextProcessor::setText(const QString &s) {
     emit textChanged();
 }
 
-int TextProcessor::timer() const {
+qreal TextProcessor::timer() const {
 
     return m_timer;
 }
 
-void TextProcessor::setTimer(const int &t) {
+void TextProcessor::setTimer(const qreal &t) {
 
     if(m_timer == t) {
         return;
@@ -89,7 +90,7 @@ int TextProcessor::checkState(const QString& input) {
 
 void TextProcessor::updateTimer() {
 
-    m_timer += 1;
+    m_timer += 0.02;
     emit timerChanged();
 }
 

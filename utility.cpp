@@ -12,5 +12,5 @@ int Utility::dp(const int& px)
 
     double dp = round( (px * m_dpi / 160) * m_pratio );
 
-    return QSysInfo::productType() == "windows" ? px : dp;
+    return dp;
 }

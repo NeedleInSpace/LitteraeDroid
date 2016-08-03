@@ -47,7 +47,9 @@ Item {
             id: lbl
             anchors.fill: parent
             anchors.leftMargin: util.dp(72)
-            text: mainMenuRoot.state === "LAUNCHED" ? processor.timer + " sec : " + field.typos : "Timer hasn't started" // TODO: working timer
+            text: mainMenuRoot.state === "LAUNCHED" ?
+                      processor.timer.toFixed(2) + " sec : " + field.typos :
+                      "Timer hasn't started"
             anchors.topMargin : util.dp(12)
             font.pixelSize: 24
             elide: Text.ElideLeft
@@ -130,13 +132,19 @@ Item {
                     case 0 :
                         var spd = processor.text.length * 60 / processor.timer;
                         mainMenuRoot.state = "";
-                        statistics.add(spd,
-                                       new Date().toLocaleDateString("yy.MMM.dd"),
-                                       typos,
-                                       spd * 1000 - typos * processor.text.length / 100, // TODO: correct points formula
-                                       true);
+                        if (sets.statenable) {
+                            pop.more = true;
+                            statistics.add(spd,
+                                           new Date().toLocaleDateString("yy.MMM.dd"),
+                                           typos,
+                                           spd * 10 - typos / processor.text.length * spd * 10 ,
+                                           true);
+                        }
+                        else
+                            pop.more = false;
                         typos = 0;
                         clear();
+                        processor.clockReset();
                         text.color = "white";
                         text.Material.accent = mW.Material.accent
                         pop.popup.open();
@@ -174,7 +182,7 @@ Item {
     //********************************************FINISHPOPUP
     FinishPopup {
 
-        id: pop // TODO: last try statistics
+        id: pop
     }
 
     //********************************************FAB

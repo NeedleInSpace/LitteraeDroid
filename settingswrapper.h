@@ -1,6 +1,6 @@
 #ifndef SETTINGSWRAPPER_H
 #define SETTINGSWRAPPER_H
-
+//Wrapper for qt settings class for use in qml
 #include <QObject>
 #include <QSettings>
 

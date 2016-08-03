@@ -1,6 +1,6 @@
 #ifndef STATISTICSMODEL_H
 #define STATISTICSMODEL_H
-//Altered copy from previous project
+//Statistics tracking system
 #include <QAbstractListModel>
 #include <QAbstractTableModel>
 #include <QList>
@@ -45,6 +45,7 @@ class StatisticsModel : public QAbstractTableModel
 {
     Q_OBJECT
     Q_PROPERTY(qreal average READ average NOTIFY averageChanged)
+    Q_PROPERTY(int best READ best NOTIFY bestChanged)
 
 public:
 
@@ -67,19 +68,23 @@ public:
 
     Q_INVOKABLE void add(const qreal& s, const QString& d, const int& t, const qreal& p, bool);
     Q_INVOKABLE void flush_stats();
+    Q_INVOKABLE QString last();
 
     qreal average() const;
     void recalc_average();
+    int best() const;
     void read_stats();
     void append_stat_file(const qreal& s, const QString& d, const int& t, const qreal& p);
 
 signals:
     void averageChanged();
+    void bestChanged();
 
 private:
 
     QList<StatisticsElement* > m_data;
     qreal m_average;
+    int m_best;
     QFile statistics;
 };
 

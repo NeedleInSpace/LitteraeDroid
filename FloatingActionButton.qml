@@ -47,7 +47,6 @@ Item {
         }
 
         onPressed: {
-            // TODO: pass property changes to states
             mainMenuRoot.state = mainMenuRoot.state === "" ? "LAUNCHED" : "";
             if (mainMenuRoot.state === "LAUNCHED") {
                 processor.randomiseText(true);

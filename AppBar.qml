@@ -17,8 +17,7 @@ ToolBar {
 
             text: appBar.title
             color: Material.primaryTextColor
-            font.family: "Roboto"
-            font.weight: Font.Medium
+            font.family: "Roboto Medium"
             font.pixelSize: 20
             anchors.left: parent.left
             anchors.leftMargin: util.dp(72)

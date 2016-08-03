@@ -52,7 +52,7 @@ ApplicationWindow {
 
         }
         SettingsTab {
-
+            id: sets
         }
 
     }

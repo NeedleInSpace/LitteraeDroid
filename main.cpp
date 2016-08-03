@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     QQuickStyle::setStyle("Material");
+
     qmlRegisterType<TextProcessor>("AppLogic",1,0,"TextProcessor");
     qmlRegisterType<StatisticsModel>("StatisticsModule",1,0,"StatisticsModel");
     qmlRegisterType<StatisticsElement>("StatisticsModule",1,0,"StatisticsElement");

@@ -1,6 +1,6 @@
 #ifndef UTILITY_H
 #define UTILITY_H
-
+//Simple utility class to calculate device independent pixels for android
 #include <QObject>
 #include <QScreen>
 #include <QGuiApplication>

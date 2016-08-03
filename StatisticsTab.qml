@@ -1,6 +1,8 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
+import QtGraphicalEffects 1.0
+import "./CustomElements"
 
 Item {
 
@@ -38,19 +40,41 @@ Item {
         }
     }
 
+
     ListView {
 
         id: statChart
         model: statistics
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: util.dp(16)
+        anchors.leftMargin: util.dp(32)
         anchors.rightMargin: anchors.leftMargin
         anchors.bottom: parent.bottom
         anchors.bottomMargin: util.dp(56)
-        height: mW.height * 0.6
+        height: parent.height * 0.6
         orientation: ListView.Horizontal
+        flickableDirection: Flickable.AutoFlickIfNeeded
+        boundsBehavior: Flickable.StopAtBounds
         spacing: 10
+
+        Rectangle {
+
+            id: bckgrnd
+            color: "white"
+            radius: 2
+            anchors.fill: parent
+            anchors.leftMargin: util.dp(-16)
+            anchors.rightMargin: anchors.leftMargin
+            anchors.bottomMargin: util.dp(-32)
+            layer.enabled: true
+            layer.effect: DropShadow {
+                color: Material.dropShadowColor
+                samples: 12
+                spread: 0.2
+                verticalOffset: 2
+            }
+            z: -1
+        }
 
         Rectangle {
 
@@ -58,7 +82,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.bottomMargin:
                 parent.currentIndex !== -1 ?
-                    (statistics.average / 300) * parent.height :
+                    (statistics.average / 5000) * parent.height :
                     util.dp(16)
 
             height: 1
@@ -66,7 +90,7 @@ Item {
             color: Material.hintTextColor
 
             Label {
-                text: "average: " + statistics.average.toFixed(2)
+                text: "average: " + statistics.average.toFixed(0)
                 anchors.right: parent.right
                 anchors.rightMargin: util.dp(16)
                 anchors.bottom: parent.top
@@ -79,7 +103,6 @@ Item {
 
             anchors.bottom: parent.bottom
             width: 1
-            z: 5
             height: parent.height - 10
             color: "red"
 
@@ -95,14 +118,15 @@ Item {
 
         delegate: Rectangle {
 
-            property var s: speed.toFixed(2)
-            property var t: typos
-            property var p: points.toFixed(0)
+            id: bar
+            property double s: speed.toFixed(2)
+            property int t: typos
+            property double p: points.toFixed(0)
             anchors.bottom: parent.bottom
             anchors.bottomMargin: util.dp(16)
-            height: (speed / 300) * statChart.height
+            height: (points / 5000) * statChart.height
             width: 40
-            color: Material.color(Material.LightBlue)
+            color: statistics.best !== index ? Material.color(Material.LightBlue) : "red"
 
             MouseArea {
                 anchors.fill: parent
@@ -112,11 +136,22 @@ Item {
             }
 
             Label {
-                text: speed.toFixed(0)
+                text: points.toFixed(0)
                 font.pixelSize: 14
                 anchors.top: parent.bottom
                 anchors.topMargin: 4
             }
+
+        }
+
+        highlight: Rectangle {
+
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: util.dp(16)
+            color: "white"
+            opacity: 0.3
+            z: 2
+
         }
 
         Rectangle {
@@ -124,14 +159,13 @@ Item {
             id: axisLine
             color: "black"
             height: 1
-            x: util.dp(-16)
-            width: mW.width
+            width: parent.width
             opacity: 0.86
             anchors.bottom: parent.bottom
             anchors.bottomMargin: util.dp(16)
         }
-    }
 
+    }
 
     Button {
 
@@ -145,6 +179,5 @@ Item {
             statistics.flush_stats()
         }
     }
+
 }
-
-

@@ -65,6 +65,7 @@ void StatisticsElement::setPoints(const qreal &p)
 
 StatisticsModel::StatisticsModel(QObject *parent) : QAbstractTableModel(parent)
 {
+    m_best = 0;
     statistics.setFileName("stats.tst");
     read_stats();
 }
@@ -172,6 +173,11 @@ void StatisticsModel::add(const qreal& s, const QString& d, const int& t, const 
     m_data.append(st);
     endInsertRows();
 
+    if(p > m_data[m_best]->points()) {
+        m_best = m_data.size() - 1;
+        emit bestChanged();
+    }
+
     recalc_average();
     if (flag)
         append_stat_file(s, d, t, p);
@@ -186,6 +192,16 @@ Qt::ItemFlags StatisticsModel::flags(const QModelIndex &index) const
     return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
+QString StatisticsModel::last()
+{
+    QString result;
+    int i = m_data.size() - 1;
+    result = "\nSpeed: " + QString::number(m_data[i]->speed()) + " cpm\n" +
+            "Typos: " + QString::number(m_data[i]->typos()) +
+            "\nTotal points: " + QString::number(m_data[i]->points());
+    return result;
+}
+
 qreal StatisticsModel::average() const
 {
     return m_average;
@@ -195,10 +211,15 @@ void StatisticsModel::recalc_average()
 {
     qreal avg = 0;
     for (StatisticsElement* f : m_data){
-        avg += f->speed();
+        avg += f->points();
     }
     m_average = avg/m_data.count();
     emit averageChanged();
+}
+
+int StatisticsModel::best() const
+{
+    return m_best;
 }
 
 //FILE FUNCTIONS
@@ -237,6 +258,8 @@ void StatisticsModel::flush_stats ()
     beginRemoveRows(QModelIndex(), 0, m_data.size());
     m_data.clear();
     endRemoveRows();
+    m_average = 0;
+    emit averageChanged();
     if (!statistics.open(QFile::WriteOnly | QFile::Truncate)) {
         qDebug("Cannot open stats file to clear");
         return;

@@ -9,6 +9,7 @@ Item {
     anchors.fill: parent
     anchors.rightMargin: util.dp(16)
     anchors.leftMargin: util.dp(28)
+    property alias statenable: stats.checked
 
     ColumnLayout {
 
@@ -41,7 +42,7 @@ Item {
             }
 
             Switch {
-
+                id: stats
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 checked: settings.value("TrackStats", "true")
