@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<manifest package="org.nis.litdroid" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="Wood" android:versionCode="3" android:installLocation="auto">
+<manifest package="org.nis.litdroid" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="v0.9_Bronze" android:versionCode="5" android:installLocation="auto">
     <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="LitteraeDroid">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="LitteraeDroid" android:screenOrientation="unspecified" android:launchMode="singleTop" android:windowSoftInputMode="stateUnspecified|adjustResize">
             <intent-filter>
@@ -63,7 +63,7 @@
 
     </application>
 
-    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="17"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
 
     <!-- The following comment will be replaced upon deployment with default permissions based on the dependencies of the application.

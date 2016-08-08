@@ -1,4 +1,5 @@
-QT += qml quick quickcontrols2
+QT += qml quick quickcontrols2 svg
+unix: QT += androidextras
 
 CONFIG += c++11
 
@@ -10,7 +11,7 @@ SOURCES += main.cpp \
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+QML_IMPORT_PATH = Q:\Qt\5.7\msvc2015\qml\QtQuick\Controls.2
 
 # Default rules for deployment.
 include(deployment.pri)

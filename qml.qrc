@@ -15,6 +15,9 @@
         <file>FinishPopup.qml</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>ic_text_format_black_24dp.png</file>
+        <file>ic_settings_24px.svg</file>
+        <file>ic_textsms_24px.svg</file>
+        <file>ic_timeline_24px.svg</file>
+        <file>ic_stars_48px.svg</file>
     </qresource>
 </RCC>

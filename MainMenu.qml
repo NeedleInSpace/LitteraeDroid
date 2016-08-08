@@ -1,10 +1,30 @@
+/****************************************************************************
+** This file is part of the UI for the LitteraeDroid program
+** Copyright (C) 2016 The Needle Company
+** Contact: needleinspace@gmail.com
+**
+** This program is free software: you can redistribute it and/or modify
+** it under the terms of the GNU General Public License as published by
+** the Free Software Foundation, either version 3 of the License, or
+** (at your option) any later version.
+**
+** This program is distributed in the hope that it will be useful,
+** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+** GNU General Public License for more details.
+**
+** You should have received a copy of the GNU General Public License
+** along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**
+****************************************************************************/
+
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Material.impl 2.0
 import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
-//import StatisticsModule 1.0
-import "./CustomElements"
+import "qrc:/CustomElements"
 
 Item {
 
@@ -36,21 +56,19 @@ Item {
         anchors.right: parent.right
         height: 80
         layer.enabled: true
-        layer.effect: DropShadow {
-            color: Material.dropShadowColor
-            samples: 10
-            spread: 0.5
+        layer.effect: ElevationEffect {
+            elevation: 4
         }
 
         Label {
 
             id: lbl
             anchors.fill: parent
-            anchors.leftMargin: util.dp(72)
+            anchors.leftMargin: 72
             text: mainMenuRoot.state === "LAUNCHED" ?
                       processor.timer.toFixed(2) + " sec : " + field.typos :
                       "Timer hasn't started"
-            anchors.topMargin : util.dp(12)
+            anchors.topMargin : 12
             font.pixelSize: 24
             elide: Text.ElideLeft
         }
@@ -58,9 +76,9 @@ Item {
 
             id: subHead
             anchors.fill: parent
-            anchors.leftMargin: util.dp(72)
+            anchors.leftMargin: 72
             text: "Time elapsed and total misprints"
-            anchors.bottomMargin: util.dp(20)
+            anchors.bottomMargin: 20
             color: Material.hintTextColor
             font.pixelSize: 14
             verticalAlignment: Text.AlignBottom
@@ -78,7 +96,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: text.top
-        anchors.bottomMargin: util.dp(16)
+        anchors.bottomMargin: 16
         contentHeight: card.height
         flickableDirection: Flickable.AutoFlickIfNeeded
 
@@ -88,9 +106,9 @@ Item {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: util.dp(16)
-            anchors.rightMargin: util.dp(16)
-            anchors.topMargin: util.dp(16)
+            anchors.leftMargin: 16
+            anchors.rightMargin: 16
+            anchors.topMargin: 16
 
         }
 
@@ -112,8 +130,8 @@ Item {
             id: field
             property int typos: 0
             anchors.fill: parent
-            anchors.leftMargin: util.dp(16)
-            anchors.rightMargin: util.dp(16)
+            anchors.leftMargin: 16
+            anchors.rightMargin: 16
             font.pixelSize: 16
             focus: false
             activeFocusOnPress: false
@@ -168,10 +186,8 @@ Item {
         }
 
         layer.enabled: true
-        layer.effect: DropShadow {
-            color: Material.dropShadowColor
-            samples: 10
-            spread: 0.5
+        layer.effect: ElevationEffect {
+            elevation: 2
         }
         Behavior on color {
             ColorAnimation {
@@ -191,8 +207,8 @@ Item {
         id: floatButt
         anchors.right: parent.right
         anchors.bottom: text.top
-        anchors.rightMargin: util.dp(16)
-        anchors.bottomMargin: util.dp(16)
+        anchors.rightMargin: 16
+        anchors.bottomMargin: 16
         z: 4
     }
 
